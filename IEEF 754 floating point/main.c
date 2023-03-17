@@ -129,5 +129,76 @@ int main()
         free(tab2);
 
     }
+
+
+    if(veritipi=='2')
+    {
+        printf("Enter a number\n");
+        scanf("%f", &number2);
+
+        printf("\n");
+
+        MyStruct NumDecomposition;
+
+        if( number2 < 0)
+        {
+            NumDecomposition = division2(-1 * number2);
+        }
+        else
+        {
+            NumDecomposition= division2(number2);
+        }
+
+        int tab1[64];
+        int high=highOfarray2(NumDecomposition.tamsayi);
+        int* tab2=(int*)malloc(high*sizeof(int));
+
+        int count=0;
+        for(int i=(high-1);i>=0; i-- )
+        {
+            tab2[i]=NumDecomposition.tamsayi%2;
+            NumDecomposition.tamsayi/=2;
+            count++;
+        }
+
+        if(number2 < 0)
+        {
+            tab1[0]=1;
+        }
+        else
+        {
+            tab1[0]=0;
+        }
+
+        count = ((count-1) + 1023 );
+
+        for(int i=11; i>=1; i--)
+        {
+            tab1[i]=count%2;
+            count/=2;
+        }
+
+        for(int i=1; i< high; i++)
+        {
+            tab1[i+ 11]= tab2[i];
+        }
+
+        for(int i=(high+11); i <64; i++)
+        {
+            NumDecomposition=division2(NumDecomposition.sayi2*2);
+            tab1[i]=NumDecomposition.tamsayi;
+            NumDecomposition.tamsayi=0;
+        }
+
+
+        for(int i=0; i <64; i++)
+        {
+            printf("%d ", tab1[i]);
+        }
+        printf("\n");
+
+        free(tab2);
+    }
+
     return 0;
 }
